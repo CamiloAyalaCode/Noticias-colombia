@@ -16,6 +16,7 @@
             <a href="#" onclick="switchView('noticias')">Noticias</a>
             <a href="#" onclick="switchView('favoritos')">Favoritos <span id="fav-counter">(0)</span></a>
             <a href="#" onclick="switchView('contacto')">Contacto</a>
+            <a href="#" onclick="switchView('admin')">Admin</a>
         </nav>
     </header>
 
@@ -105,6 +106,90 @@
                 </div>
             </div>
         </section>
+
+        <!-- VISTA: ADMINISTRACIÓN -->
+        <section id="view-admin" class="view-section" style="display:none;">
+            <div class="admin-header">
+                <div>
+                    <h2>Administración de Noticias</h2>
+                    <p id="admin-counter">0 publicaciones</p>
+                </div>
+
+                <button class="btn-main" onclick="mostrarFormularioAdmin()">
+                    + Nueva noticia
+                </button>
+            </div>
+
+            <div id="admin-form-container" class="admin-form-container" style="display:none;">
+                <h3>Nueva noticia</h3>
+
+                <form id="admin-form" onsubmit="crearNoticia(event)">
+                    <div class="form-group">
+                        <label for="admin-titulo">Título *</label>
+                        <input type="text" id="admin-titulo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-categoria">Categoría *</label>
+                        <select id="admin-categoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="educacion">Educación</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="turismo">Turismo</option>
+                            <option value="comercio">Comercio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-resumen">Resumen *</label>
+                        <textarea id="admin-resumen" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-contenido">Contenido *</label>
+                        <textarea id="admin-contenido" rows="5" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-autor">Autor *</label>
+                        <input type="text" id="admin-autor" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-fecha">Fecha *</label>
+                        <input type="date" id="admin-fecha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-imagen">URL o ruta de imagen</label>
+                        <input type="text" id="admin-imagen" placeholder="img/noticia.jpg">
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="submit" class="btn-main">Guardar noticia</button>
+                        <button type="button" class="tab-btn" onclick="ocultarFormularioAdmin()">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoría</th>
+                            <th>Autor</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-news-table-body"></tbody>
+                </table>
+            </div>
+        </section>
+        
     </main>
 
     <footer class="main-footer">
