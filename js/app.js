@@ -13,7 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
 async function cargarNoticiasDesdeJSON() {
     try {
         const respuesta = await fetch('data/noticias.json');
-        todasLasNoticias = await respuesta.json();
+        const noticiasJSON = await respuesta.json();
+
+const noticiasGuardadas = JSON.parse(
+    localStorage.getItem('noticias_admin')
+);
+
+todasLasNoticias = noticiasGuardadas || noticiasJSON;
         
         // Inicializar vistas con los datos cargados
         renderizarHome();
@@ -210,4 +216,146 @@ function validateForm(event) {
             successBox.style.display = 'none';
         }, 5000);
     }
+}
+// 10. Renderizar panel de administración
+function renderizarAdmin() {
+    const tbody = document.getElementById('admin-news-table-body');
+    const contador = document.getElementById('admin-counter');
+
+    if (!tbody || !contador) return;
+
+    tbody.innerHTML = '';
+    contador.innerText = `${todasLasNoticias.length} publicaciones`;
+
+    todasLasNoticias.forEach(noticia => {
+        const fila = document.createElement('tr');
+
+        fila.innerHTML = `
+            <td>${noticia.titulo}</td>
+            <td>${noticia.categoria}</td>
+            <td>${noticia.autor}</td>
+            <td>${noticia.fecha}</td>
+            <td>
+                <button class="btn-delete" onclick="eliminarNoticia(${noticia.id})">
+                    Eliminar
+                </button>
+            </td>
+        `;
+
+        tbody.appendChild(fila);
+    });
+}
+
+
+// 11. Mostrar formulario de creación
+function mostrarFormularioAdmin() {
+    const formulario = document.getElementById('admin-form-container');
+    formulario.style.display = 'block';
+
+    formulario.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+}
+
+
+// 12. Ocultar formulario
+function ocultarFormularioAdmin() {
+    document.getElementById('admin-form-container').style.display = 'none';
+    document.getElementById('admin-form').reset();
+}
+
+
+// 13. Crear nueva noticia
+function crearNoticia(event) {
+    event.preventDefault();
+
+    const titulo = document.getElementById('admin-titulo').value.trim();
+    const categoria = document.getElementById('admin-categoria').value;
+    const resumen = document.getElementById('admin-resumen').value.trim();
+    const contenido = document.getElementById('admin-contenido').value.trim();
+    const autor = document.getElementById('admin-autor').value.trim();
+    const fecha = document.getElementById('admin-fecha').value;
+    const imagen = document.getElementById('admin-imagen').value.trim();
+
+    if (
+        !titulo ||
+        !categoria ||
+        !resumen ||
+        !contenido ||
+        !autor ||
+        !fecha
+    ) {
+        alert('Por favor completa todos los campos obligatorios.');
+        return;
+    }
+
+    const nuevoId = todasLasNoticias.length > 0
+        ? Math.max(...todasLasNoticias.map(n => n.id)) + 1
+        : 1;
+
+    const nuevaNoticia = {
+        id: nuevoId,
+        titulo,
+        categoria,
+        resumen,
+        contenido,
+        autor,
+        fecha,
+        imagen: imagen || 'https://placehold.co/800x450?text=Noticia'
+    };
+
+    todasLasNoticias.push(nuevaNoticia);
+
+    guardarNoticiasAdmin();
+
+    renderizarAdmin();
+    renderizarListado(todasLasNoticias);
+    renderizarHome();
+
+    ocultarFormularioAdmin();
+
+    alert('Noticia creada correctamente.');
+}
+
+
+// 14. Eliminar noticia
+function eliminarNoticia(id) {
+    const confirmar = confirm(
+        '¿Está seguro de eliminar esta noticia?'
+    );
+
+    if (!confirmar) return;
+
+    todasLasNoticias = todasLasNoticias.filter(
+        noticia => noticia.id !== id
+    );
+
+    // Si estaba en favoritos, también se elimina de allí
+    favoritos = favoritos.filter(
+        favId => favId !== id
+    );
+
+    localStorage.setItem(
+        'noticias_favoritas',
+        JSON.stringify(favoritos)
+    );
+
+    guardarNoticiasAdmin();
+
+    renderizarAdmin();
+    renderizarListado(todasLasNoticias);
+    renderizarHome();
+    actualizarContadorGlobalFavoritos();
+
+    alert('Noticia eliminada correctamente.');
+}
+
+
+// 15. Guardar cambios administrativos
+function guardarNoticiasAdmin() {
+    localStorage.setItem(
+        'noticias_admin',
+        JSON.stringify(todasLasNoticias)
+    );
 }
