@@ -34,6 +34,10 @@ function switchView(viewName) {
     if (viewName === 'favoritos') {
         renderizarFavoritos();
     }
+
+    if (viewName === 'admin') {
+    renderizarAdmin();
+    }    
     window.scrollTo(0, 0);
 }
 
