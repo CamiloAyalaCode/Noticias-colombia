@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias Colombia - Plataforma Web</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Encabezado Persistente (Criterio de Maquetación) -->
+    <header class="main-header">
+        <div class="logo">Noticias <span>Colombia</span></div>
+        <nav class="nav-links">
+            <a href="#" onclick="switchView('home')">Inicio</a>
+            <a href="#" onclick="switchView('noticias')">Noticias</a>
+            <a href="#" onclick="switchView('favoritos')">Favoritos <span id="fav-counter">(0)</span></a>
+            <a href="#" onclick="switchView('contacto')">Contacto</a>
+        </nav>
+    </header>
+
+    <main id="app-content">
+        <!-- VISTA: HOME -->
+        <section id="view-home" class="view-section">
+            <div class="hero">
+                <h1>Mantente informado de lo que está pasando</h1>
+                <p>Plataforma de noticias sobre educación, tecnología, turismo y comercio en Colombia.</p>
+                <button class="btn-main" onclick="switchView('noticias')">Explorar Noticias</button>
+            </div>
+            <h2>Edición Destacada</h2>
+            <div id="featured-news-container" class="news-grid"></div>
+        </section>
+
+        <!-- VISTA: LISTADO DE NOTICIAS -->
+        <section id="view-noticias" class="view-section" style="display:none;">
+            <h2>Archivo General</h2>
+            <div class="filter-bar">
+                <input type="text" id="search-input" placeholder="Buscar noticias por título o texto..." oninput="filterNews()">
+                <div class="categories-tabs">
+                    <button class="tab-btn active" onclick="filterByCategory('todas', this)">Todas</button>
+                    <button class="tab-btn" onclick="filterByCategory('educacion', this)">Educación</button>
+                    <button class="tab-btn" onclick="filterByCategory('tecnologia', this)">Tecnología</button>
+                    <button class="tab-btn" onclick="filterByCategory('turismo', this)">Turismo</button>
+                    <button class="tab-btn" onclick="filterByCategory('comercio', this)">Comercio</button>
+                </div>
+            </div>
+            <p id="results-counter">Resultados encontrados: 0</p>
+            <div id="general-news-container" class="news-grid"></div>
+        </section>
+
+        <!-- VISTA: DETALLE DE NOTICIA -->
+        <section id="view-detalle" class="view-section" style="display:none;">
+            <button class="btn-back" onclick="switchView('noticias')">← Volver al listado</button>
+            <article id="article-detail" class="detail-article"></article>
+        </section>
+
+        <!-- VISTA: FAVORITOS -->
+        <section id="view-favoritos" class="view-section" style="display:none;">
+            <h2>Mis Noticias Favoritas</h2>
+            <div id="favorites-news-container" class="news-grid"></div>
+        </section>
+
+        <!-- VISTA: CONTACTO -->
+        <section id="view-contacto" class="view-section" style="display:none;">
+            <div class="contacto-wrapper">
+                <div class="form-container">
+                    <h2>Contáctanos</h2>
+                    <form id="contact-form" onsubmit="validateForm(event)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo *</label>
+                            <input type="text" id="nombre">
+                            <span class="error-msg" id="err-nombre">El nombre es requerido (mínimo 3 letras).</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="correo">Correo Electrónico *</label>
+                            <input type="email" id="correo">
+                            <span class="error-msg" id="err-correo">Ingresa un formato de correo válido.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="asunto">Asunto *</label>
+                            <select id="asunto">
+                                <option value="">Selecciona un asunto...</option>
+                                <option value="editorial">Sugerencia Editorial</option>
+                                <option value="publicidad">Publicidad y Comercio</option>
+                                <option value="soporte">Soporte Técnico</option>
+                            </select>
+                            <span class="error-msg" id="err-asunto">Debes seleccionar un asunto.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" rows="5"></textarea>
+                            <span class="error-msg" id="err-mensaje">El mensaje no puede estar vacío (mínimo 10 caracteres).</span>
+                        </div>
+                        <button type="submit" class="btn-main">Enviar Mensaje</button>
+                    </form>
+                    <div id="form-success" class="success-box" style="display:none;">
+                        ¡Mensaje enviado con éxito! Nos comunicaremos contigo pronto.
+                    </div>
+                </div>
+                <div class="info-sidebar">
+                    <h3>Información Corporativa</h3>
+                    <p><strong>📍 Dirección:</strong> Calle 72 #10-34, Bogotá, Colombia</p>
+                    <p><strong>📞 Teléfono:</strong> +57 601 234 5678</p>
+                    <p><strong>✉️ Correo:</strong> contacto@noticiascol.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 Noticias Colombia - Politécnico Grancolombiano. Integrantes: Camilo, Antonio, Fleimer.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

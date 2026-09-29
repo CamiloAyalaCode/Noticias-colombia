@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "titulo": "La inteligencia artificial está transformando la educación superior",
+    "categoria": "educacion",
+    "resumen": "Las universidades de América Latina están integrando herramientas de IA para personalizar el aprendizaje...",
+    "contenido": "Contenido completo de la noticia: La IA se ha convertido en el pilar fundamental del desarrollo académico en el año 2026. Diversas instituciones públicas y privadas de Colombia lideran la transición hacia aulas virtuales interactivas adaptadas al ritmo de cada estudiante.",
+    "autor": "Camilo Torres",
+    "fecha": "26 de septiembre de 2026",
+    "imagen": "https://unsplash.com"
+  },
+  {
+    "id": 2,
+    "titulo": "Colombia lanza su primera red nacional de computación cuántica",
+    "categoria": "tecnologia",
+    "resumen": "El gobierno colombiano y tres universidades líderes inauguran un nodo de computación cuántica de alta velocidad.",
+    "contenido": "Contenido completo: Este hito tecnológico posiciona al país como un referente regional en computación avanzada, facilitando la investigación en criptografía y biotecnología.",
+    "autor": "Sebastián Ortega",
+    "fecha": "25 de septiembre de 2026",
+    "imagen": "https://unsplash.com"
+  },
+  {
+    "id": 3,
+    "titulo": "El turismo de naturaleza en el Amazonas colombiano bate récords históricos",
+    "categoria": "turismo",
+    "resumen": "Los departamentos de la región reportan más de 380,000 visitantes durante el primer semestre.",
+    "contenido": "Contenido completo: Gracias a las políticas de conservación y promoción sostenible, viajeros internacionales han elegido masivamente las reservas naturales colombianas.",
+    "autor": "Diana Cruz",
+    "fecha": "24 de septiembre de 2026",
+    "imagen": "https://unsplash.com"
+  },
+  {
+    "id": 4,
+    "titulo": "Las exportaciones de café colombiano crecen un 21% impulsadas por mercados asiáticos",
+    "categoria": "comercio",
+    "resumen": "Nuevos acuerdos comerciales logran reactivar significativamente las ventas directas a China y Japón.",
+    "contenido": "Contenido completo: El sector cafetero celebra este repunte económico que beneficia directamente a más de 500 mil familias productoras en el eje cafetero.",
+    "autor": "María José Ramírez",
+    "fecha": "23 de septiembre de 2026",
+    "imagen": "https://unsplash.com"
+  }
+]
